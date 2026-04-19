@@ -14,11 +14,7 @@ async function registerRunnerCmd() {
   cmdArgs.push(`--url`, core.getInput('server_url'))
   cmdArgs.push(`--token`, core.getInput('registration-token'))
   cmdArgs.push(`--name`, core.getInput('name'))
-  cmdArgs.push(`--tag-list`, core.getInput('tag-list'))
-  cmdArgs.push(`--docker-privileged`, true)
-  cmdArgs.push(`--locked="false"`)
-  cmdArgs.push(`--access-level="${core.getInput('access-level')}"`)
-  cmdArgs.push(`--run-untagged="${core.getInput('run-untagged')}"`)
+  cmdArgs.push(`--docker-privileged=true`)
 
   await exec('docker run', cmdArgs);
 }
