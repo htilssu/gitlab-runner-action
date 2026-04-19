@@ -1,6 +1,6 @@
 name: GitLab Runner Service
 description: 'Runs a gitlab runner'
-author: 'Ederson Brilhante'
+author: 'Ederson Brilhante x Trung Hieu'
 branding:
   icon: 'server'
   color: 'purple'
