@@ -26,6 +26,10 @@ inputs:
     description: 'Parameter to create or not a protected runner'
     required: false
     default: "not_protected"
+  server_url:
+    description: 'Gitlab server url'
+    required: false
+    default: 'https://gitlab.com/'
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'dist/index.js'

@@ -4,6 +4,7 @@
   "description": "Runs a gitlab runner",
   "main": "index.js",
   "scripts": {
+    "build": "ncc build index.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,8 +22,10 @@
   },
   "homepage": "https://github.com/edersonbrilhante/gitlab-runner-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "1.9.1",
     "@actions/exec": "^1.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.4"
+  }
 }
