@@ -1,4 +1,4 @@
-name: GitLab Runner Service
+name: GitLab Runner X
 description: 'Runs a gitlab runner'
 author: 'Ederson Brilhante x Trung Hieu'
 branding:
