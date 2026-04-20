@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const { exec } = require('@actions/exec');
+const {exec} = require('@actions/exec');
 const path = require("path");
 
 async function registerRunnerCmd() {
@@ -50,16 +50,17 @@ async function stopRunnerCmd() {
   await exec('docker rm ', cmdArgs);
 }
 
-async function checkJob(){
+async function checkJob() {
+  process.env['TIMEOUT'] = core.getInput('timeout')
   await exec(`${path.resolve(__dirname, "dist")}/check-job.sh`)
 }
 
 async function registerRunner() {
-  try{
+  try {
     await registerRunnerCmd()
     await startRunnerCmd()
     await checkJob()
-  }finally{
+  } finally {
     await unregisterRunner()
   }
 }

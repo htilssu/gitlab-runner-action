@@ -1,7 +1,5 @@
 #!/bin/bash
 
-TIMEOUT=$((5 * 3600 + 50 * 60))  # 5h50m = 21000 giây
-
 echo "⏳ Đang theo dõi gitlab-runner..."
 echo "🕐 Bắt đầu: $(date '+%Y-%m-%d %H:%M:%S')"
 echo "⏱️  Timeout: 5 giờ 50 phút"
@@ -15,7 +13,7 @@ echo ""
 echo "🕐 Kết thúc: $(date '+%Y-%m-%d %H:%M:%S')"
 
 if [ $PIPELINE_EXIT -eq 124 ]; then
-    echo "⚠️  Timeout sau 5h50p — Pipeline chưa hoàn thành."
+    echo "⚠️  Timeout sau $(TIMEOUT) giây — Pipeline chưa hoàn thành."
 else
     echo "✅ Pipeline successfully!"
 fi

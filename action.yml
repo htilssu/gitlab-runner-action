@@ -30,6 +30,10 @@ inputs:
     description: 'Gitlab server url'
     required: false
     default: 'https://gitlab.com/'
+  timeout:
+    description: 'Time in seconds to wait for the runner to be registered, default is 60 seconds'
+    required: false
+    default: '21000'
 runs:
   using: 'node24'
   main: 'dist/index.js'
