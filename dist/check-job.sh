@@ -1,4 +1,23 @@
 #!/bin/bash
 
-sed '/Pipeline successfully/q' <( docker logs gitlab-runner -f 2>&1)
-          
+TIMEOUT=$((5 * 3600 + 50 * 60))  # 5h50m = 21000 giây
+
+echo "⏳ Đang theo dõi gitlab-runner..."
+echo "🕐 Bắt đầu: $(date '+%Y-%m-%d %H:%M:%S')"
+echo "⏱️  Timeout: 5 giờ 50 phút"
+
+# Chạy docker logs với timeout
+timeout "$TIMEOUT" bash -c "sed '/Pipeline successfully/q' <(docker logs gitlab-runner -f 2>&1)"
+
+PIPELINE_EXIT=$?
+
+echo ""
+echo "🕐 Kết thúc: $(date '+%Y-%m-%d %H:%M:%S')"
+
+if [ $PIPELINE_EXIT -eq 124 ]; then
+    echo "⚠️  Timeout sau 5h50p — Pipeline chưa hoàn thành."
+else
+    echo "✅ Pipeline successfully!"
+fi
+
+exit 0
