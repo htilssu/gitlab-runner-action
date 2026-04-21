@@ -28002,18 +28002,7 @@ async function registerRunnerCmd() {
   cmdArgs.push(`--docker-privileged=true`)
 
   await exec('docker run', cmdArgs);
-  await exec('docker stop gitlab-runner')
-}
-
-async function unregisterRunnerCmd() {
-  let cmdArgs = [];
-  cmdArgs.push(`--rm`)
-  cmdArgs.push(`-v`, `/srv/gitlab-runner/config:/etc/gitlab-runner`)
-  cmdArgs.push(`gitlab/gitlab-runner`)
-  cmdArgs.push(`unregister`)
-  cmdArgs.push(`--name`, core.getInput('name'))
-
-  await exec('docker run', cmdArgs);
+  
   const concurrent = core.getInput('concurrent').trim();
   if (!/^\d+$/.test(concurrent)) {
     throw new Error(`Invalid concurrent value: ${concurrent}. Expected a positive integer string.`);
@@ -28025,6 +28014,17 @@ async function unregisterRunnerCmd() {
     `s/^concurrent = [0-9]+$/concurrent = ${concurrent}/`,
     '/srv/gitlab-runner/config/config.toml',
   ]);
+}
+
+async function unregisterRunnerCmd() {
+  let cmdArgs = [];
+  cmdArgs.push(`--rm`)
+  cmdArgs.push(`-v`, `/srv/gitlab-runner/config:/etc/gitlab-runner`)
+  cmdArgs.push(`gitlab/gitlab-runner`)
+  cmdArgs.push(`unregister`)
+  cmdArgs.push(`--name`, core.getInput('name'))
+
+  await exec('docker run', cmdArgs);
 }
 
 async function startRunnerCmd() {
