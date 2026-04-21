@@ -29,7 +29,17 @@ async function unregisterRunnerCmd() {
   cmdArgs.push(`--name`, core.getInput('name'))
 
   await exec('docker run', cmdArgs);
-  await exec('sed -i "s/concurrent = 1/concurrent = ' + core.getInput('concurrent') + '/" /srv/gitlab-runner/config/config.toml')
+  const concurrent = core.getInput('concurrent').trim();
+  if (!/^\d+$/.test(concurrent)) {
+    throw new Error(`Invalid concurrent value: ${concurrent}. Expected a positive integer string.`);
+  }
+
+  await exec('sed', [
+    '-i',
+    '-E',
+    `s/^concurrent = [0-9]+$/concurrent = ${concurrent}/`,
+    '/srv/gitlab-runner/config/config.toml',
+  ]);
 }
 
 async function startRunnerCmd() {
