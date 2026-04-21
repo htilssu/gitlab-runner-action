@@ -30,6 +30,10 @@ inputs:
     description: 'Gitlab server url'
     required: false
     default: 'https://gitlab.com/'
+  concurrent:
+    description: 'Number of concurrent jobs'
+    required: false
+    default: '1'
 runs:
   using: 'node20'
   main: 'dist/index.js'

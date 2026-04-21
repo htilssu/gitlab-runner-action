@@ -17,6 +17,7 @@ async function registerRunnerCmd() {
   cmdArgs.push(`--docker-privileged=true`)
 
   await exec('docker run', cmdArgs);
+  await exec('docker stop gitlab-runner')
 }
 
 async function unregisterRunnerCmd() {
@@ -28,6 +29,7 @@ async function unregisterRunnerCmd() {
   cmdArgs.push(`--name`, core.getInput('name'))
 
   await exec('docker run', cmdArgs);
+  await exec('sed -i "s/concurrent = 1/concurrent = ' + core.getInput('concurrent') + '/" /srv/gitlab-runner/config/config.toml')
 }
 
 async function startRunnerCmd() {
