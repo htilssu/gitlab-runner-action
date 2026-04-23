@@ -14,6 +14,7 @@ async function registerRunnerCmd() {
   cmdArgs.push(`--url`, core.getInput('server_url'))
   cmdArgs.push(`--token`, core.getInput('registration-token'))
   cmdArgs.push(`--name`, core.getInput('name'))
+  cmdArgs.push(`--docker-volumes`, `/var/run/docker.sock:/var/run/docker.sock`)
   cmdArgs.push(`--docker-privileged=true`)
 
   await exec('docker run', cmdArgs);
