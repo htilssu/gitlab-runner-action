@@ -65,7 +65,7 @@ async function stopRunnerCmd() {
 
 async function checkJob() {
   process.env['TIMEOUT'] = core.getInput('timeout')
-  await exec(`${path.resolve(__dirname, "dist")}/check-job.sh`)
+  await exec(`${path.resolve(__dirname)}/check-job.sh`)
 }
 
 async function registerRunner() {
