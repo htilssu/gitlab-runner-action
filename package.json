@@ -4,7 +4,7 @@
   "description": "Runs a gitlab runner",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js -o dist",
+    "build": "rolldown index.js --file dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,6 @@
     "@actions/exec": "^1.0.4"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.4"
+    "rolldown": "1.0.0-rc.17"
   }
 }
